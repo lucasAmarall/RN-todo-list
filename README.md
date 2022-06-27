@@ -24,7 +24,11 @@ You can check the graphql playground in `http://localhost:3000/graphql`. All the
 - Testing (unit or e2e with Detox)
 - Redux store.
 
+## Next Steps
 
+- Clone this repository
+- Create a new branch feature/lastname-firstname
+- Implement your solution on a **client** named folder.
 
 
 
