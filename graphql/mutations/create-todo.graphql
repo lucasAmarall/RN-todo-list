@@ -1,0 +1,12 @@
+mutation CreateTodo($input: CreateTodoInput!){
+    createTodo(input: $input){
+        id
+        createdAt
+        description
+        complete
+    }
+}
+
+input CreateTodoInput {
+    description: String
+}

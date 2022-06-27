@@ -1,0 +1,12 @@
+mutation SetTodoComplete($input: SetTodoCompleteInput!){
+    setTodoComplete(input: $input){
+        id
+        createdAt
+        description
+        complete
+    }
+}
+
+input SetTodoCompleteInput {
+    todoId: Float
+}
