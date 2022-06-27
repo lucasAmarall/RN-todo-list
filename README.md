@@ -28,7 +28,7 @@ You can check the graphql playground in `http://localhost:3000/graphql`. All the
 
 - Clone this repository
 - Create a new branch feature/lastname-firstname
-- Implement your solution on a **client** named folder
+- Implement your solution on a **client** named folder.
 
 
 
