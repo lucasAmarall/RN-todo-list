@@ -8,7 +8,7 @@ Todo List Graphql API
 ## Installation
 All the solution runs in docker, but the CLI runs outside, that's why you need to install the dependencies.
 ```bash
-$ cd backend && npm install
+$ cd backend && npm ci
 ```
 
 ```bash
