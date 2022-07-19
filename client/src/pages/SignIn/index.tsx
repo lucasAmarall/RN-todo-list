@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {KeyboardAvoidingView} from 'react-native';
 import {Button} from '../../components/Button';
 import {PasswordInput, TextInput} from '../../components/Input';
+import {useAuth} from '../../hooks/useAuth';
 import {
   SignInContainer,
   SignInHeaderImage,
@@ -19,10 +20,17 @@ const assets = {
 };
 
 const SignIn = () => {
+  const signInAuth = useAuth();
+
   const [formState, setFormState] = useState({
     email: '',
     password: '',
   });
+
+  const signIn = () => {
+    signInAuth.signIn(formState);
+  };
+
   return (
     <KeyboardAvoidingView style={{flex: 1}}>
       <SignInContainer>
@@ -57,9 +65,7 @@ const SignIn = () => {
             />
           </SignInInputContainer>
           <SignInButtonContainer>
-            <Button onPress={() => alert(JSON.stringify(formState, null, 2))}>
-              Sign in
-            </Button>
+            <Button onPress={signIn}>Sign in</Button>
           </SignInButtonContainer>
         </SignInFormContainer>
       </SignInContainer>

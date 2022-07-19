@@ -1,16 +1,14 @@
+import {ApolloProvider} from '@apollo/client';
 import React from 'react';
+import {GlobalProvider} from './src/context/globalContext';
 import {Router} from './src/router';
-import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
-
-// Initialize Apollo Client
-const client = new ApolloClient({
-  uri: 'localhost:4000/graphql',
-  cache: new InMemoryCache(),
-});
+import {apolloClient} from './src/services/apollo';
 
 const App = () => (
-  <ApolloProvider client={client}>
-    <Router />
+  <ApolloProvider client={apolloClient}>
+    <GlobalProvider>
+      <Router />
+    </GlobalProvider>
   </ApolloProvider>
 );
 
