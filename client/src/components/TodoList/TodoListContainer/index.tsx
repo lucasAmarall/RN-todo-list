@@ -10,6 +10,7 @@ interface ITodo {
 
 const Separator = () => (
   <View
+    // eslint-disable-next-line react-native/no-inline-styles
     style={{width: '100%', backgroundColor: 'rgba(0,0,0,0.5)', height: 1}}
   />
 );

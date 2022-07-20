@@ -23,7 +23,7 @@ const PasswordInput: React.FC<IPasswordInputProps> = props => {
 
   return (
     <PasswordInputContainer>
-      <TextInput secureTextEntry={passwordVisibility} {...props} />
+      <TextInput secureTextEntry={!passwordVisibility} {...props} />
 
       <TouchableWithoutFeedback onPress={togglePasswordVisibility}>
         <PasswordInputToggleButtonContainer>

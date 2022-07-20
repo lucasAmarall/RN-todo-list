@@ -27,7 +27,7 @@ const KeyboardSpacer: React.FC<{
       showSubscription.remove();
       hideSubscription.remove();
     };
-  }, []);
+  }, [keyboardHeight, offSet]);
 
   return <Animated.View style={{height: keyboardHeight}} />;
 };
