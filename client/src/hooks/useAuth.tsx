@@ -12,7 +12,7 @@ interface ISignInData {
 const useAuth = () => {
   const globalDispatch = useGlobalDispatch();
   const [login, {error, loading, data}] = useMutation(USER_LOGIN_MUTATION, {
-    onError: e => console.log(e),
+    onError: _ => null,
   });
 
   const signIn = (input: ISignInData) => {

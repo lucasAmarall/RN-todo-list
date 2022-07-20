@@ -18,7 +18,7 @@ const TodoListItem: React.FC<ITodoListItemProps> = ({
   return (
     <TodoListItemContainer>
       <BouncyCheckbox
-        disableBuiltInState
+        disableBuiltInState={complete}
         isChecked={complete}
         size={25}
         bounceEffect={1}

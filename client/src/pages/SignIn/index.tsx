@@ -23,8 +23,8 @@ const SignIn = () => {
   const signInAuth = useAuth();
 
   const [formState, setFormState] = useState({
-    email: 'user@test.com',
-    password: 'Test1234',
+    email: '',
+    password: '',
   });
 
   const signIn = () => {
@@ -64,6 +64,9 @@ const SignIn = () => {
               }
             />
           </SignInInputContainer>
+          <SignInFormSubTitle>
+            {signInAuth?.error?.message || ' '}
+          </SignInFormSubTitle>
           <SignInButtonContainer>
             <Button onPress={signIn}>Sign in</Button>
           </SignInButtonContainer>

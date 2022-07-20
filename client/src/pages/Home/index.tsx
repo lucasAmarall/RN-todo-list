@@ -1,22 +1,23 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {FlatList, View} from 'react-native';
+import React, {useRef, useState} from 'react';
+import {FlatList} from 'react-native';
 import {KeyboardSpacer} from '../../components/KeyboardSpacer';
 import {TodoListContainer} from '../../components/TodoList/TodoListContainer';
 import {TodoListItem} from '../../components/TodoList/TodoListItem';
 import {useTodo} from '../../hooks/useTodo';
 import {TAB_BAR_HEIGHT} from '../../constants/TabNavigatorHeight';
 import {Button} from '../../components/Button';
-import {HomeContainer, HomeFooterContainer} from './styles';
-import {InputRawInput} from '../../components/Input/styles';
+import {
+  HomeContainer,
+  HomeFooterButtonContainer,
+  HomeFooterContainer,
+  HomeFooterInput,
+  HomeFooterInputContainer,
+} from './styles';
 
 const Home = () => {
   const listRef = useRef<FlatList | null>(null);
   const [newTodo, setNewTodo] = useState('');
   const {list, create, complete} = useTodo();
-
-  useEffect(() => {
-    list.refetch();
-  }, [list]);
 
   const createTodo = () => {
     if (!newTodo) return;
@@ -33,14 +34,14 @@ const Home = () => {
   };
 
   const finishTodo = (todoId: number) => {
-    complete.finalize({todoId}).then(() => list.refetch());
+    complete.finalize({todoId});
   };
 
   return (
     <HomeContainer>
       <TodoListContainer
         ref={listRef}
-        refreshing={list.loading || create.loading || complete.loading}
+        refreshing={list.loading || create.loading}
         onRefresh={list.refetch}
         data={list.data?.todosByUser.todos}
         renderItem={({item}) => {
@@ -53,21 +54,20 @@ const Home = () => {
         }}
       />
       <HomeFooterContainer>
-        <View style={{flex: 0.8}}>
-          <InputRawInput
-            style={{height: 50}}
+        <HomeFooterInputContainer>
+          <HomeFooterInput
             placeholder="New todo"
             value={newTodo}
             onChangeText={setNewTodo}
             onSubmitEditing={createTodo}
             blurOnSubmit
           />
-        </View>
-        <View style={{flex: 0.2, marginLeft: 20}}>
+        </HomeFooterInputContainer>
+        <HomeFooterButtonContainer>
           <Button onPress={createTodo} small>
             Add
           </Button>
-        </View>
+        </HomeFooterButtonContainer>
       </HomeFooterContainer>
       <KeyboardSpacer offSet={TAB_BAR_HEIGHT} />
     </HomeContainer>
