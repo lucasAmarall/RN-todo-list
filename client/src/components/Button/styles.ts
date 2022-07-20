@@ -1,9 +1,12 @@
 import styled from 'styled-components/native';
 import {BaseText} from '../Typography';
 
+interface IButtonContainerProps {
+  small: boolean;
+}
 export const ButtonContainer = styled.View`
   background-color: rgba(231, 105, 110, 1);
-  padding: 16px;
+  padding: ${({small}: IButtonContainerProps) => (small ? 8 : 16)}px;
   border-radius: 16px;
   flex: 1;
   justify-content: center;

@@ -5,11 +5,12 @@ import {ButtonContainer, ButtonLabel} from './styles';
 interface ButtonProps {
   children: string;
   onPress: () => void;
+  small?: boolean;
 }
-const Button: React.FC<ButtonProps> = ({children, onPress}) => {
+const Button: React.FC<ButtonProps> = ({children, small, onPress}) => {
   return (
     <TouchableWithoutFeedback onPress={onPress} style={{flex: 1}}>
-      <ButtonContainer>
+      <ButtonContainer small={small}>
         <ButtonLabel>{children}</ButtonLabel>
       </ButtonContainer>
     </TouchableWithoutFeedback>
