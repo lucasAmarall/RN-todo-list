@@ -69,7 +69,7 @@ const Home = () => {
           </Button>
         </HomeFooterButtonContainer>
       </HomeFooterContainer>
-      <KeyboardSpacer offSet={TAB_BAR_HEIGHT} />
+      <KeyboardSpacer />
     </HomeContainer>
   );
 };

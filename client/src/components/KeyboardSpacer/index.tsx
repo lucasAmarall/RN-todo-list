@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import {Animated, Keyboard} from 'react-native';
 
 const KeyboardSpacer: React.FC<{
-  offSet: number;
+  offSet?: number;
 }> = ({offSet = 0}) => {
   const keyboardHeight = useRef(new Animated.Value(0)).current;
 

@@ -6,6 +6,9 @@ const useApolloClient = () => {
   const {token} = useGlobalState();
 
   const httpLink = new HttpLink({
+    // FOR ANDROID
+    // uri: 'http://10.0.2.2:3000/graphql',
+    // FOR IOS
     uri: 'http://localhost:3000/graphql',
   });
 

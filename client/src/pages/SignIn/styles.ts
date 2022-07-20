@@ -26,7 +26,6 @@ export const SignInHeaderLabel = styled(BaseText)`
 export const SignInFormContainer = styled.View`
   margin-top: 60px;
   width: 100%;
-  height: 400px;
 `;
 
 export const SignInFormTitle = styled(BaseText)`
