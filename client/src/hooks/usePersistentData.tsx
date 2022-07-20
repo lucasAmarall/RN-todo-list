@@ -9,10 +9,8 @@ const usePersistentData = <T extends unknown>(key: string, defaultValue: T) => {
     setIsLoading(true);
     const rawValue = await AsyncStorage.getItem(key);
     setIsLoading(false);
-
     if (!rawValue) return;
     const parsedValue = JSON.parse(rawValue ?? '');
-
     if (parsedValue) setState(parsedValue);
   }, [key]);
 

@@ -7,3 +7,23 @@ export const USER_LOGIN_MUTATION = gql`
     }
   }
 `;
+
+export const CREATE_TODO_MUTATION = gql`
+  mutation CreateTodo($input: CreateTodoInput!) {
+    createTodo(input: $input) {
+      id
+      createdAt
+      description
+      complete
+    }
+  }
+`;
+
+export const COMPLETE_TODO_MUTATION = gql`
+  mutation SetTodoComplete($input: SetTodoCompleteInput!) {
+    setTodoComplete(input: $input) {
+      id
+      complete
+    }
+  }
+`;

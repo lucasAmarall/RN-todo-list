@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {KeyboardAvoidingView} from 'react-native';
 import {Button} from '../../components/Button';
 import {PasswordInput, TextInput} from '../../components/Input';
@@ -23,8 +23,8 @@ const SignIn = () => {
   const signInAuth = useAuth();
 
   const [formState, setFormState] = useState({
-    email: '',
-    password: '',
+    email: 'user@test.com',
+    password: 'Test1234',
   });
 
   const signIn = () => {
