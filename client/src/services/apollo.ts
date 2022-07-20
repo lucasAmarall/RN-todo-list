@@ -1,23 +1,29 @@
 import {ApolloClient, InMemoryCache, HttpLink} from '@apollo/client';
 import {setContext} from '@apollo/client/link/context';
+import useGlobalState from '../hooks/useGlobalState';
 
-const httpLink = new HttpLink({
-  uri: 'http://localhost:3000/graphql',
-});
+const useApolloClient = () => {
+  const {token} = useGlobalState();
 
-const authLink = setContext((_, {headers}) => {
-  return {
-    headers: {
-      ...headers,
-      authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ1c2VyQHRlc3QuY29tIiwiaWF0IjoxNjU4MjkyMDM4LCJleHAiOjE2NTgyOTU2Mzh9.9feCsJsytRIjPF0_4AWHVTcna_9w-gwoA9cALYc_LIA`,
-    },
-  };
-});
+  const httpLink = new HttpLink({
+    uri: 'http://localhost:3000/graphql',
+  });
 
-// Initialize Apollo Client
-const apolloClient = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
-});
+  const authLink = setContext((_, {headers}) => {
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? `Bearer ${token}` : '',
+      },
+    };
+  });
 
-export {apolloClient};
+  // Initialize Apollo Client
+  const apolloClient = new ApolloClient({
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache(),
+  });
+
+  return {apolloClient};
+};
+export {useApolloClient};

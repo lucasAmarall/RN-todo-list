@@ -4,6 +4,7 @@ import {
   CREATE_TODO_MUTATION,
 } from '../graphql/mutations';
 import {GET_USER_TODOS} from '../graphql/queries';
+import {useAuth} from './useAuth';
 
 interface ITodo {
   id: string;
@@ -28,21 +29,22 @@ interface ICompleteTodoInput {
 }
 
 const useTodo = () => {
+  const {statusCodeMiddleware} = useAuth();
   const list = useQuery<IUserTodosRes>(GET_USER_TODOS, {
-    onError: e => console.log(e),
+    onError: statusCodeMiddleware,
   });
 
   const [createTodo, creationInfo] = useMutation<ICreateTodoInput>(
     CREATE_TODO_MUTATION,
     {
-      onError: e => console.log(JSON.stringify(e, null, 2)),
+      onError: statusCodeMiddleware,
     },
   );
 
   const [completeTodo, completeInfo] = useMutation<ICompleteTodoInput>(
     COMPLETE_TODO_MUTATION,
     {
-      onError: e => console.log(JSON.stringify(e, null, 2)),
+      onError: statusCodeMiddleware,
     },
   );
 

@@ -2,14 +2,23 @@ import {ApolloProvider} from '@apollo/client';
 import React from 'react';
 import {GlobalProvider} from './src/context/globalContext';
 import {Router} from './src/router';
-import {apolloClient} from './src/services/apollo';
+import {useApolloClient} from './src/services/apollo';
 
-const App = () => (
-  <ApolloProvider client={apolloClient}>
-    <GlobalProvider>
+const RenderApolloProvider = () => {
+  const {apolloClient} = useApolloClient();
+
+  return (
+    <ApolloProvider client={apolloClient}>
       <Router />
-    </GlobalProvider>
-  </ApolloProvider>
-);
+    </ApolloProvider>
+  );
+};
 
+const App = () => {
+  return (
+    <GlobalProvider>
+      <RenderApolloProvider />
+    </GlobalProvider>
+  );
+};
 export {App};

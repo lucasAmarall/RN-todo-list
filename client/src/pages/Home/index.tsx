@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {Alert, View} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {FlatList, View} from 'react-native';
 import {KeyboardSpacer} from '../../components/KeyboardSpacer';
 import {TodoListContainer} from '../../components/TodoList/TodoListContainer';
 import {TodoListItem} from '../../components/TodoList/TodoListItem';
@@ -10,6 +10,7 @@ import {HomeContainer, HomeFooterContainer} from './styles';
 import {InputRawInput} from '../../components/Input/styles';
 
 const Home = () => {
+  const listRef = useRef<FlatList | null>(null);
   const [newTodo, setNewTodo] = useState('');
   const {list, create, complete} = useTodo();
 
@@ -17,17 +18,18 @@ const Home = () => {
     list.refetch();
   }, [list]);
 
-  const createTodo = async () => {
+  const createTodo = () => {
     if (!newTodo) return;
-    await create.save({description: newTodo});
-    list
-      .refetch()
-      .then(() => {
-        setNewTodo('');
-      })
-      .catch(() => {
-        Alert.alert('There was an error, please try again');
+    create.save({description: newTodo}).then(() => {
+      list.refetch().then(() => {
+        setTimeout(() => {
+          setNewTodo('');
+          listRef?.current?.scrollToEnd({
+            animated: true,
+          });
+        }, 300);
       });
+    });
   };
 
   const finishTodo = (todoId: number) => {
@@ -37,9 +39,10 @@ const Home = () => {
   return (
     <HomeContainer>
       <TodoListContainer
-        refreshing={list.loading || create.loading}
+        ref={listRef}
+        refreshing={list.loading || create.loading || complete.loading}
         onRefresh={list.refetch}
-        data={[...(list.data?.todosByUser.todos || [])].reverse()}
+        data={list.data?.todosByUser.todos}
         renderItem={({item}) => {
           return (
             <TodoListItem

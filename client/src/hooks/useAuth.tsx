@@ -31,6 +31,12 @@ const useAuth = () => {
     });
   };
 
+  const statusCodeMiddleware = e => {
+    if (e.message == 'Unauthorized') {
+      signOut();
+    }
+  };
+
   useEffect(() => {
     const token = data?.login.accessToken;
     if (!token) return;
@@ -43,6 +49,7 @@ const useAuth = () => {
   return {
     signOut,
     signIn,
+    statusCodeMiddleware,
     error,
     loading,
     data,

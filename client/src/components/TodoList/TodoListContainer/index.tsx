@@ -14,15 +14,20 @@ const Separator = () => (
   />
 );
 
-const TodoListContainer: React.FC<FlatListProps<ITodo>> = props => {
-  return (
-    <FlatList
-      {...props}
-      ItemSeparatorComponent={Separator}
-      showsVerticalScrollIndicator={false}
-      keyExtractor={item => item.id}
-    />
-  );
-};
+interface ITodoListContainerProps extends FlatListProps<ITodo> {}
+
+const TodoListContainer: React.FC<ITodoListContainerProps> = React.forwardRef(
+  (props, ref) => {
+    return (
+      <FlatList
+        {...props}
+        ref={ref}
+        ItemSeparatorComponent={Separator}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={item => item.id}
+      />
+    );
+  },
+);
 
 export {TodoListContainer};
